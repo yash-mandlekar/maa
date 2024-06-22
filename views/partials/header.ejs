@@ -1,0 +1,84 @@
+<link rel="stylesheet" href="../stylesheets/header.css" />
+
+<div id="left">
+  <div id="nav-logo">
+    <img height="100" src="../../images/logo2.jpeg" alt="">
+
+  </div>
+
+  <a href="/dashboard" style="text-decoration: none">
+    <div class="cnt">
+      <ion-icon name="home-outline"></ion-icon>
+      <h3>Dashboard</h3>
+    </div>
+  </a>
+  <a href="/course" style="text-decoration: none">
+    <div class="cnt">
+      <ion-icon name="copy-outline"></ion-icon>
+      <h3>Course</h3>
+    </div>
+  </a>
+  <a href="/inquiry" style="text-decoration: none">
+    <div class="cnt">
+      <ion-icon name="people-outline"></ion-icon>
+      <h3>Inquiry</h3>
+    </div>
+  </a>
+  <a href="/student" style="text-decoration: none">
+    <div class="cnt">
+      <ion-icon name="person-outline"></ion-icon>
+      <h3>Student</h3>
+    </div>
+  </a>
+  <div class="cnt">
+    <ion-icon name="book-outline"></ion-icon>
+    <h3>Register</h3>
+  </div>
+  <a href="/addStaff" style="text-decoration: none">
+    <div class="cnt">
+      <ion-icon name="id-card-outline"></ion-icon>
+      <h3>Staff</h3>
+    </div>
+  </a>
+  <a href="/fees" style="text-decoration: none">
+    <div class="cnt">
+      <ion-icon name="wallet-outline"></ion-icon>
+      <h3 class="flex">
+        Fees
+        <div class="noti-dot">0</div>
+      </h3>
+    </div>
+  </a>
+  <a href="/feesManagement" style="text-decoration: none">
+    <div class="cnt">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <h3>Fees Management</h3>
+    </div>
+  </a>
+  <div class="cnt">
+    <ion-icon name="settings-outline"></ion-icon>
+    <h3>Setup</h3>
+  </div>
+</div>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js"
+  integrity="sha512-PJa3oQSLWRB7wHZ7GQ/g+qyv6r4mbuhmiDb8BjSFZ8NZ2a42oTtAq5n0ucWAwcQDlikAtkub+tPVCw4np27WCg=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+<script>
+  var noti = document.querySelector(".noti-dot");
+  const fetchDate = async () => {
+    const date = await axios.get("/getdate");
+    var count = 0;
+    date.data.students.forEach((elem) => {
+      new Date(elem.dueDate) < new Date() && count++;
+    });
+    noti.innerHTML = count;
+    // console.log(new Date().toDateString());
+  };
+  fetchDate();
+  // document.querySelector(
+  //   `#${window.location.pathname.split("/")[1]} h3`
+  // ).style.fontWeight = "800";
+</script>

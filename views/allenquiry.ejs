@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./stylesheets/allenquiry.css" />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </head>
+  <body>
+    <div id="main">
+      <%- include('./partials/header') %>
+      <div id="right">
+        <%- include('./partials/right-header') %>
+        <div id="cover">
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              All Inquiry
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/inquiry">Add Inquiry</a></li>
+              <li>
+                <a class="dropdown-item" href="/rejected">Rejected Inquiry</a>
+              </li>
+            </ul>
+          </div>
+          <div id="inq">
+            <h4>Inquiry List</h4>
+            <table class="table">
+              <thead>
+                <tr class="table-info">
+                  <th scope="col">Name</th>
+                  <th scope="col">Mobile</th>
+                  <th scope="col">Course</th>
+                  <th scope="col">Fees</th>
+                  <th scope="col">Enquiry Date</th>
+                  <th scope="col">Joining Date</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% students.forEach(std => { %>
+                <tr id="<%= std._id %>">
+                  <th scope="row"><%=std.firstName %> <%=std.lastName %></th>
+                  <td><%=std.contactNumber %></td>
+                  <td>
+                    <% std.course.forEach(e=>{ %>
+                      <%= e.courseCode %> 
+                    <% }) %>
+                  </td>
+                  <td><%=std.due %></td>
+                  <td><%=std.enquiryDate.toDateString()%></td>
+                  <td><%=std.joiningDate.toDateString() %></td>
+                  <td>
+                    <a href="/delete/enquiry/<%= std._id %>">
+                      ❌
+                    </a>
+                    <a href="/accepted/enquiry/<%= std._id %>">
+                      ✅
+                    </a>
+                  </td>
+                  <td></td>
+                </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
